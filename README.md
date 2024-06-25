@@ -1,6 +1,5 @@
 ## TWRP device tree for the Samsung Exynos 9611 devices
 Current targets:
-- gta4xl
 - m21
 - m31
 - m31s
@@ -13,7 +12,7 @@ To build:
 ```sh
 . build/envsetup.sh
 export ALLOW_MISSING_DEPENDENCIES=true
-lunch twrp_gta4xl-eng
+lunch twrp_m31s-eng
 mka recoveryimage
 ```
 
