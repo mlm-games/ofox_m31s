@@ -46,7 +46,7 @@ jobs:
         BUILD_TARGET: 'recovery'
 
     - name: Upload to Release        # Github artifact action eats your space even if you delete the artifacts :\
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       if: success()
       with:
         files: |
