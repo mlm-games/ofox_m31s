@@ -7,6 +7,16 @@ on:
   pull_request: 
     branches:  
       - '**'   
+  workflow_dispatch:
+    inputs:
+      upload_releases:
+        description: 'Upload releases'
+        required: true
+        default: 'true'
+      mark_prerelease:
+        description: 'Mark as prerelease'
+        required: true
+        default: 'false'
 
 jobs:
   build:
@@ -38,9 +48,9 @@ jobs:
         DEVICE_PATH: 'device/samsung/m31s'
         BUILD_TARGET: 'recovery'
 
-    - name: Upload to Release        # Github artifact action eats your space even if you delete the artifacts :\
+    - name: Upload to Release
       uses: softprops/action-gh-release@v2
-      if: success()
+      if: github.event_name == 'workflow_dispatch' && inputs.upload_releases == 'true'
       with:
         files: |
           ${{ env.OUTPUT_DIR }}/OrangeFox*.img
@@ -55,4 +65,4 @@ jobs:
           Commit: Most recent [commit](${{ env.DEVICE_TREE }}/commit/${{ env.COMMIT_ID }}) during building.
           MD5 (img): ${{ env.MD5_IMG }}
           MD5 (zip): ${{ env.MD5_ZIP }}
-        prerelease: true
+        prerelease: ${{ inputs.mark_prerelease }}
