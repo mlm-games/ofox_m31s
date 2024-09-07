@@ -55,6 +55,7 @@ You can flash a custom rom like qnttechh's [Alphadroid](https://sourceforge.net/
 
 Tested AlphaDroid by me on m31s and has few bugs like
 - RIL (mobile network and calls are very unstable)
-- NFC (Doesnt disable for phones released in different regions)
+- NFC (Doesnt disable it for phones released in different regions)
+- Auto Rotate (Doesnt work)
 
 This project is licensed under [GPL-3.0](LICENSE).
