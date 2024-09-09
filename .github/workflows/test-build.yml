@@ -1,16 +1,12 @@
 name: Build OrangeFox Recovery
 
 on:
-  push:        
-    branches:  
+  push: &pointer     
+    branches: 
       - '**'   # This will match all branches
     paths-ignore:
       - 'README.md'
-  pull_request: 
-    branches:  
-      - '**'   
-    paths-ignore:
-      - 'README.md'
+  pull_request: *pointer
   workflow_dispatch:
     inputs:
       upload_releases:
