@@ -4,6 +4,8 @@ on:
   push:        
     branches:  
       - '**'   # This will match all branches
+    paths-ignore:
+      - 'README.md'
   pull_request: 
     branches:  
       - '**'   
