@@ -32,10 +32,7 @@ jobs:
     permissions:
       contents: write
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
-    - name: Clean-up
+    - name: Clean ubuntu
       uses: rokibhasansagar/slimhub_actions@main
 
     - name: Swap Space
@@ -45,9 +42,6 @@ jobs:
 
     - name: Build OrangeFox Recovery
       uses: mlm-games/OrangeFox-Builder-Action@main 
-      id: build
-      with:
-        DEVICE_TREE_BRANCH: 'android-12.1'
         
     - name: Upload to Release
       uses: softprops/action-gh-release@v2
@@ -57,8 +51,9 @@ jobs:
           ${{ env.OUTPUT_DIR }}/OrangeFox*.img
           ${{ env.OUTPUT_DIR }}/OrangeFox*.tar
           ${{ env.OUTPUT_DIR }}/OrangeFox*.zip
+          ${{ env.OUTPUT_DIR }}/*vbmeta*    
           ${{ env.OUTPUT_DIR }}/ramdisk-recovery.*
-        name: Unofficial OrangeFox for ${{ env.DEVICE_NAME }} // ${{ env.BUILD_DATE }}
+        name: Unofficial OrangeFox for ${{ env.DEVICE_NAME }} // ${{ format('{0:yyyyMMdd}', github.event.head_commit.timestamp) }}
         tag_name: ${{ github.run_id }}
         body: |
           Build: ${{ env.MANIFEST_BRANCH }}
