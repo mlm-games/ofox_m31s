@@ -46,6 +46,8 @@ Special thanks to all contributors and maintainers of the Exynos 9611 GitLab rep
 
 ## Flashing a Custom ROM 
 
+> Old version of Alphadroid (where RIL worked) doesnt work through install zip or adb sideload, can use lineageOS (May, only using sideload) for that. 
+
 You can flash a custom rom like qnttechh's [Alphadroid](https://sourceforge.net/projects/qnttechh/files/samsung/m31s/AlphaDroid-V2.4/) using below steps
 
 - Format data -> yes
