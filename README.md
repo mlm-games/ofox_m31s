@@ -55,7 +55,7 @@ You can flash a custom rom like qnttechh's [Alphadroid](https://sourceforge.net/
 - Flash the rom and Gapps (Optional, used this version of [MindtheGapps](https://github.com/MindTheGapps/14.0.0-arm64/releases/download/MindTheGapps-14.0.0-arm64-20240612_135921/MindTheGapps-14.0.0-arm64-20240612_135921.zip), But can try latest version, Dirty flashing/Flashing after booting -> No Play Integrity, Normal -> Meets Basic Integrity)
 - Use the Kernel from [here](https://github.com/mlm-games/kernel_samsung_exynos_9611) for KSU and then can use the Play Integrity Fix module for play store cert.
 
-Tested AlphaDroid by me on m31s and has few bugs like
+Tested AlphaDroid on m31s and has few bugs like
 - RIL (mobile network and calls are very unstable)
 - NFC (Doesnt disable it for phones released in different regions)
 - Auto Rotate (Doesnt work)
