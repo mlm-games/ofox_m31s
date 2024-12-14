@@ -61,7 +61,7 @@ on:
       build_target:
         description: 'Build Target (recovery, boot, or vendorboot)'
         required: false
-        default: 'vendorboot'
+        default: 'recovery'
         type: string
 
 jobs:
@@ -80,7 +80,7 @@ jobs:
       DEVICE_NAME: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.device_name || '' }}
       DEVICE_PATH: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.device_path || '' }}
       MAKEFILE_NAME: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.makefile_name || '' }}
-      BUILD_TARGET: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.build_target || 'vendorboot' }}
+      BUILD_TARGET: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.build_target || 'recovery' }}
     steps:
       - name: Clean Ubuntu
         uses: rokibhasansagar/slimhub_actions@main
