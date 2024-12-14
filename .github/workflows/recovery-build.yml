@@ -59,7 +59,7 @@ jobs:
         id: build_info
         run: |
           echo "BUILD_DATE=$(date +'%Y-%m-%d %H:%M:%S %Z')" >> $GITHUB_ENV
-          echo "COMMIT_SHORT=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_ENV
+
       - name: Build TWRP
         if: matrix.name == 'TWRP'
         uses: mlm-games/TWRP-recovery-build-action@main
@@ -88,7 +88,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: inputs.upload_releases == false || github.event_name != 'workflow_dispatch'
         with:
-          name: ${{ matrix.name }}-${{ env.DEVICE_NAME }}-${{ env.COMMIT_SHORT }}
+          name: ${{ matrix.name }}-${{ env.DEVICE_NAME }}-${{ env.BUILD_DATE }}
           path: |
             ${{ env.OUTPUT_DIR }}/*.img
             ${{ env.OUTPUT_DIR }}/*.tar
@@ -107,14 +107,13 @@ jobs:
             ${{ env.OUTPUT_DIR }}/ramdisk-recovery.*
             ${{ env.OUTPUT_DIR }}/*.zip
           name: "${{ matrix.name }} Recovery for ${{ env.DEVICE_NAME }} | ${{ env.BUILD_DATE }}"
-          tag_name: ${{ matrix.name }}-${{ env.DEVICE_NAME }}-${{ env.COMMIT_SHORT }}
+          tag_name: ${{ matrix.name }}-${{ env.DEVICE_NAME }}-${{ env.BUILD_DATE }}
           body: |
             ## 📱 ${{ matrix.name }} Recovery for ${{ env.DEVICE_NAME }}
             
             ### 📋 Build Information
             - **Build Date**: ${{ env.BUILD_DATE }}
             - **Branch**: `${{ env.BRANCH_NAME }}`
-            - **Commit**: [`${{ env.COMMIT_SHORT }}`](${{ github.server_url }}/${{ github.repository }}/commit/${{ env.COMMIT_SHORT }})
             
             ### 🔧 Device Information
             - **Device Tree**: [${{ env.DEVICE_NAME }}](${{ env.DEVICE_TREE }}/tree/${{ env.BRANCH_NAME }})
