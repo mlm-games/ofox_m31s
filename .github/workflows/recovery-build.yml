@@ -53,12 +53,7 @@ jobs:
       - name: Swap Space
         uses: pierotofy/set-swap-space@master
         with:
-          swap-size-gb: 12
-
-      - name: Generate Build Info
-        id: build_info
-        run: |
-          echo "BUILD_DATE=$(date +'%Y-%m-%d %H:%M:%S %Z')" >> $GITHUB_ENV
+          swap-size-gb: 16
 
       - name: Build TWRP
         if: matrix.name == 'TWRP'
@@ -84,6 +79,11 @@ jobs:
           DEVICE_TREE_BRANCH: ${{ env.BRANCH_NAME }}
           BUILD_TARGET: 'pbrp'
 
+      - name: Generate Build Info
+        id: build_info
+        run: |
+          echo "BUILD_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         if: inputs.upload_releases == false || github.event_name != 'workflow_dispatch'
@@ -91,18 +91,16 @@ jobs:
           name: ${{ matrix.name }}-${{ env.DEVICE_NAME }}-${{ env.BUILD_DATE }}
           path: |
             ${{ env.OUTPUT_DIR }}/*.img
-            ${{ env.OUTPUT_DIR }}/*.tar
             ${{ env.OUTPUT_DIR }}/*vbmeta*
             ${{ env.OUTPUT_DIR }}/*.cpio
             ${{ env.OUTPUT_DIR }}/*.zip
-            
+
       - name: Upload to Release
         if: github.event_name == 'workflow_dispatch' && env.UPLOAD_RELEASES == 'true'
         uses: softprops/action-gh-release@v2
         with:
           files: |
             ${{ env.OUTPUT_DIR }}/*.img
-            ${{ env.OUTPUT_DIR }}/*.tar
             ${{ env.OUTPUT_DIR }}/*vbmeta*
             ${{ env.OUTPUT_DIR }}/ramdisk-recovery.*
             ${{ env.OUTPUT_DIR }}/*.zip
@@ -121,7 +119,7 @@ jobs:
             ### 📊 Checksums
             ```
             Image (IMG): ${{ env.MD5_IMG }}
-            Ramdisk: ${{ env.MD5_ZIP }}
+            Zip (if present): ${{ env.MD5_ZIP }}
             ```
             
             ### ⚠️ Notes
