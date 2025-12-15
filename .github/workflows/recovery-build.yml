@@ -85,7 +85,7 @@ jobs:
           echo "BUILD_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: inputs.upload_releases == false || github.event_name != 'workflow_dispatch'
         with:
           name: ${{ matrix.name }}-${{ env.DEVICE_NAME }}-${{ env.BUILD_DATE }}
